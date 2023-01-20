@@ -1,0 +1,20 @@
+org: smcclure17
+app: contribution-cards
+service: contribution-cards
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+ - serverless-offline
+
+functions:
+  api:
+    handler: lib/index.handler
+    environment:
+      GITHUB_ACCESS_TOKEN: ${ssm:/github-access-token}
+    events:
+      - httpApi: '*'
+    
